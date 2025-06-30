@@ -1,0 +1,77 @@
+.modal-backdrop {
+  position: fixed;
+  z-index: 999;
+  inset: 0;
+  background: rgba(25, 118, 210, 0.13);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal {
+  background: #fff;
+  min-width: 300px;
+  max-width: 95vw;
+  box-shadow: 0 8px 32px rgba(25, 118, 210, 0.26), 0 1.5px 7px #1976d22b;
+  border-radius: 16px;
+  padding: 2em 1.5em 1.5em 1.5em;
+  position: relative;
+  color: #282c34;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2em;
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.edit-form .task-input {
+  width: 100%;
+  min-width: 180px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 1em;
+  justify-content: flex-end;
+}
+
+.cancel-btn, .save-btn {
+  font-weight: 600;
+  padding: 0.47em 1.5em;
+  border-radius: 8px;
+  border: none;
+  font-size: 1em;
+  cursor: pointer;
+  outline: none;
+  opacity: 0.94;
+  transition: background 0.17s, color 0.16s;
+}
+.cancel-btn {
+  background: #eee;
+  color: #424242;
+}
+.cancel-btn:hover {
+  background: #f8f7f7;
+}
+.save-btn {
+  background: #ff9800;
+  color: #fff;
+}
+.save-btn:disabled {
+  background: #ffd699;
+  color: #fff;
+  opacity: 0.78;
+  cursor: not-allowed;
+}
+.save-btn:hover:not(:disabled) {
+  background: #ef6c00;
+}
+
+@media (max-width: 600px) {
+  .modal {
+    padding: 1em 0.4em 1.3em 0.4em;
+  }
+}

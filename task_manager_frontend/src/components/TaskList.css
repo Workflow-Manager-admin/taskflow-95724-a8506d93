@@ -1,0 +1,127 @@
+.task-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 580px;
+  margin-left: auto;
+  margin-right: auto;
+  background: var(--bg-primary);
+}
+
+.task-list-empty {
+  text-align: center;
+  opacity: 0.7;
+  margin-top: 2em;
+  color: #424242;
+}
+
+.task-list-item {
+  display: flex;
+  align-items: center;
+  background: #f8f9fa;
+  border: 1px solid var(--border-color);
+  margin: 0.5em 0;
+  border-radius: 12px;
+  padding: 1.1em 1.15em;
+  box-shadow: 0 2px 5px rgba(25, 118, 210, 0.03);
+  justify-content: space-between;
+  gap: 12px;
+  transition: background 0.23s;
+}
+
+.task-list-item.completed {
+  background: #e3f2fd;
+  opacity: 0.87;
+  text-decoration: line-through;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-grow: 1;
+  cursor: pointer;
+}
+
+input[type="checkbox"] {
+  accent-color: #1976d2;
+  width: 1.2em;
+  height: 1.2em;
+}
+
+.task-title {
+  font-size: 1.17em;
+  font-weight: 500;
+  color: #1976d2;
+}
+.task-title.completed {
+  color: #424242;
+}
+
+.task-desc {
+  flex: 1;
+  margin-left: 1.25em;
+  color: #424242;
+  font-size: 0.93em;
+  opacity: 0.88;
+}
+
+.task-actions {
+  display: flex;
+  gap: 0.5em;
+}
+
+.edit-btn,
+.delete-btn {
+  background: none;
+  border: none;
+  font-size: 1.25em;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 0.25em;
+  opacity: 0.80;
+  transition: background 0.16s, color 0.16s, transform 0.12s;
+}
+
+.edit-btn:hover {
+  background: #ff98003a;
+  color: #ff9800;
+}
+
+.delete-btn:hover {
+  background: #f4433615;
+  color: #f44336;
+}
+
+@media (max-width: 600px) {
+  .task-list-item {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.8em 0.7em;
+    gap: 6px;
+  }
+  .task-desc {
+    margin-left: 0;
+  }
+}
+
+.loading-indicator {
+  text-align: center;
+  margin-top: 2.5em;
+  color: #1976d2;
+  font-size: 1.13em;
+  opacity: 0.77;
+}
+
+.task-error {
+  background: #fff3e0;
+  color: #ff9800;
+  border: 1px solid #ff9800;
+  border-radius: 8px;
+  padding: 0.75em 1.25em;
+  margin: 1em auto 0.8em auto;
+  max-width: 410px;
+  font-size: 1em;
+  text-align: center;
+}
