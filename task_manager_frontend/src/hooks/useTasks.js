@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
-
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3001"; // edit if needed
+import {
+  getTasks as apiGetTasks,
+  createTask as apiCreateTask,
+  updateTask as apiUpdateTask,
+  deleteTask as apiDeleteTask
+} from "../api";
 
 // PUBLIC_INTERFACE
 export function useTasks() {
@@ -18,15 +22,15 @@ export function useTasks() {
   // Fetch all tasks
   useEffect(() => {
     fetchTasks();
+    // eslint-disable-next-line
   }, []);
 
+  // PUBLIC_INTERFACE
   async function fetchTasks() {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch(`${API_URL}/tasks`);
-      if (!res.ok) throw new Error("Failed to fetch tasks");
-      const data = await res.json();
+      const data = await apiGetTasks();
       setTasks(data);
     } catch (e) {
       setError(e.message || "Failed to fetch tasks");
@@ -40,13 +44,7 @@ export function useTasks() {
     setRefreshing(true);
     setError(null);
     try {
-      const res = await fetch(`${API_URL}/tasks`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(task),
-      });
-      if (!res.ok) throw new Error("Failed to create task");
-      const newTask = await res.json();
+      const newTask = await apiCreateTask(task);
       setTasks(prev => [...prev, newTask]);
     } catch (e) {
       setError(e.message || "Failed to create task");
@@ -61,13 +59,7 @@ export function useTasks() {
     setRefreshing(true);
     setError(null);
     try {
-      const res = await fetch(`${API_URL}/tasks/${task.id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(task),
-      });
-      if (!res.ok) throw new Error("Failed to update task");
-      const updatedTask = await res.json();
+      const updatedTask = await apiUpdateTask(task);
       setTasks(prev => prev.map(t => t.id === updatedTask.id ? updatedTask : t));
     } catch (e) {
       setError(e.message || "Failed to update task");
@@ -82,10 +74,7 @@ export function useTasks() {
     setRefreshing(true);
     setError(null);
     try {
-      const res = await fetch(`${API_URL}/tasks/${task.id}`, {
-        method: "DELETE",
-      });
-      if (!res.ok) throw new Error("Failed to delete task");
+      await apiDeleteTask(task.id);
       setTasks(prev => prev.filter(t => t.id !== task.id));
     } catch (e) {
       setError(e.message || "Failed to delete task");
